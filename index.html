@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+</head>
+<body>
+    
+
+    <script>
+        // Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBz4_WjRPHYDkMQhtNoqqlFVajTdgWlXkg",
+  authDomain: "dacs4-c040a.firebaseapp.com",
+  projectId: "dacs4-c040a",
+  storageBucket: "dacs4-c040a.appspot.com",
+  messagingSenderId: "16357444641",
+  appId: "1:16357444641:web:0f4e1f6f70d79b439c6760"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics()
+
+const storage = firebase.storage();
+const news=[];
+storage.ref('news').list()
+  .then((res) => {
+    res.prefixes.forEach((folderRef) => {
+    });
+    res.items.forEach((itemRef) => {
+      console.log(itemRef.name)
+      storage.ref(itemRef.fullPath).getDownloadURL()
+  .then((url) => {
+    // `url` is the download URL for 'images/stars.jpg'
+console.log(url)
+  })
+  .catch((error) => {
+    // Handle any errors
+  });
+
+    });
+  }).catch((error) => {
+    // Uh-oh, an error occurred!
+  });
+    </script>
+</body>
+</html>
